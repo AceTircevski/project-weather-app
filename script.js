@@ -6,9 +6,9 @@ const container = document.getElementById("today");
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 const weathers = {
-  Cloudy: "noun_weather.png",
-  Sunny: "noun_sunny.png",
-  Drizzle: "noun_Drizzle.png"
+  cloudy: "noun_weather.png",
+  sunny: "noun_sunny.png",
+  drizzle: "noun_Drizzle.png"
   
 };
 
@@ -21,9 +21,9 @@ fetch(
   .then(json => {
     console.log(json);
 
-    const sunriseHour = new Date(json.sys.sunrise * 1000).toLocaleTimeString(
-      [],
-      {
+    const sunriseHour = new Date(json.sys.sunrise * 1000).toLocaleTimeString([], {
+      
+      
         hour: "2-digit",
         minute: "2-digit" 
       }
@@ -35,11 +35,11 @@ fetch(
 
     console.log(`Sunrise: ${sunriseHour}, Sunset: ${sunsetHour}`);
 
-    container.innerHTML = `<h1>Today's weather in: </h1> <h1 id="location">${json.name} 
+    container.innerHTML = `<h1>Today's weather in: </h1> <span>${json.name} </span>
     </h1>  <h2>${json.main.temp}&#8451;</h2> <img src="noun_Drizzle.png"${weathers[json.weather[0].main]}/>
       
-     <h3 id="todaysMinMax">${json.main.temp_min}&#8451; /
-   ${json.main.temp_max} &#8451;</h3>	<h2> sunrise ${sunriseHour} </h2> <h2>sunset ${sunsetHour} </h2>`;
+     <h3 id="todaysMinMax"> min ${json.main.temp_min}&#8451; / max
+   ${json.main.temp_max} &#8451;</h3>	<h2> sunrise ${sunriseHour} sunset ${sunsetHour} </h2>`;
   });
   
 const handle5DayForecast = json => {
